@@ -4,18 +4,18 @@
     <img width="250" src="./public/logo.ico">
 </div>
 
-## Contents
+## Nội dung
 
-- [Description](#description)
-- [Features](#features)
+- [Mô tả](#Mô tả)
+- [Chức năng](#Chức năng)
 - [Requirements](#requirements-for-development)
 - [Installation](#installation-for-development)
 - [Screenshoots](#screenshoots)
 
-## Description
+## Mô tả
 
 **Trendy Web** là một ứng dụng web e-commerce B2C cho phép khách hàng xem và đặt mua quần áo. Đồng thời cho phép người bán đăng bán các sản phẩm. Admin có vai trò xem và quản lý người dùng.
-## Features
+## Chức năng
 
 - Order product
 - History transaction
