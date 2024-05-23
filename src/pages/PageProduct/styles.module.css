@@ -121,3 +121,31 @@
 	height: 100%;
 	object-fit: contain;
 }
+
+.productList {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .productListInner {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px; /* Khoảng cách giữa các thẻ sản phẩm */
+  }
+  
+  .cardImg {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+.user {
+	display: flex;
+	align-items: center; /* Căn các phần tử theo chiều dọc */
+	margin-left: 25%;
+	margin-bottom: 3rem;
+  }
+  
+  .store {
+	margin-left: 20%; /* Đẩy phần tử sang bên phải, đảm bảo phần còn lại của không gian trống */
+  }
+  
