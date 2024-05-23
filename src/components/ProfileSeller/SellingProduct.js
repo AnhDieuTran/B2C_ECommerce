@@ -120,7 +120,6 @@ export default function SellingProduct(props) {
           onChange={(e) => handleChangeFile(e)}
           ref={inputRef}
           type='file'
-          multiple
           className={styles.hiddeninput}
         />
         {/* INVENTORY */}
@@ -209,7 +208,7 @@ export default function SellingProduct(props) {
               <div className={styles.radioselect}>
                 <input
                   type='radio'
-                  value='Baru'
+                  value='New'
                   name='condition'
                   className={styles.selectNew}
                   onChange={(e) => {
@@ -220,7 +219,7 @@ export default function SellingProduct(props) {
                 <input
                   className={styles.selectOld}
                   type='radio'
-                  value='Bekas'
+                  value='Old'
                   name='condition'
                   onChange={(e) => {
                     setProduct({ ...product, status: e.target.value });

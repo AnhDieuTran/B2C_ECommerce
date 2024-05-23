@@ -72,12 +72,12 @@ const PageProduct = (props) => {
 	React.useEffect(() => {
 		try {
 			if (stateProductDetail.name) {
-				document.title = stateProductDetail.name + " | Blanja";
+				document.title = stateProductDetail.name + " | Trendy";
 			} else {
-				document.title = "Loading... | Blanja";
+				document.title = "Loading... | Trendy";
 			}
 		} catch {
-			document.title = "404 Not Found | Blanja";
+			document.title = "404 Not Found | Trendy";
 		}
 	}, [stateProductDetail]);
 

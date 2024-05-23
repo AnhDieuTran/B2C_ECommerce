@@ -7,8 +7,13 @@ import { Table } from "react-bootstrap";
 
 export default function MyOrder() {
   const { dataGetOrderAdmin } = useSelector((state) => state.product);
+  console.log("...",dataGetOrderAdmin)
   function formatRupiah(value) {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  function getProductNames(products) {
+    const names = products.map(product => product.name);
+    return names.join(', ');
   }
   return (
     <div className={styles.container}>
@@ -32,19 +37,13 @@ export default function MyOrder() {
                   style={{ backgroundColor: "#F7F7F7", border: "none" }}
                   className={styles.headertable}>
                   <tr>
-                    <th style={{ width: "10%" }}>No.</th>
-                    <th style={{ width: "20%" }}>
-                      Invoice <img src={sort} />{" "}
-                    </th>
-                    <th style={{ width: "25%" }}>
-                      Customer <img src={sort} />
-                    </th>
-                    <th style={{ width: "20%", textAlign: "center" }}>
-                      Total <img src={sort} />
-                    </th>
-                    <th style={{ width: "25%", textAlign: "center" }}>
-                      Dates <img src={sort} />
-                    </th>
+                    <th style={{ width: "5%" }}>No.</th>
+                    <th style={{ width: "12%" }}>Invoice <img src={sort} />{" "}</th>
+                    <th style={{ width: "20%" }}>Customer <img src={sort} /></th>
+                    <th style={{ width: "25%" }}>Product <img src={sort} alt="Sort" /></th>
+                    <th style={{ width: "15%" }}>Payment <img src={sort} alt="Sort" /></th>
+                    <th style={{ width: "10%", textAlign: "center" }}>Total <img src={sort} /></th>
+                    <th style={{ width: "25%", textAlign: "center" }}>Dates <img src={sort} /></th>
                   </tr>
                 </thead>
                 <tbody borderless>
@@ -55,6 +54,8 @@ export default function MyOrder() {
                         <td>{index + 1}</td>
                         <td>{item.transaction_id}</td>
                         <td>{item.name}</td>
+                        <td>{getProductNames(item.products)}</td>
+                        <td>{item.payment_method}</td>
                         <td>{formatRupiah(Number(item.amount))}</td>
                         <td style={{ textAlign: "center" }}>
                           {item.date

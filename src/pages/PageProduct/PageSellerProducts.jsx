@@ -53,8 +53,8 @@ const PageSellerProducts = (props) => {
               imgStyle={styles.cardImg}
             />
             <div className={styles.store}>
-                <h1>{shop.store_name}</h1>
-                <p>{shop.store_desc}</p>
+                <h1>{shop.name}</h1>
+                <h3>{shop.store_desc}</h3>
             </div>
         </div>
 
@@ -75,7 +75,7 @@ const PageSellerProducts = (props) => {
                           image={product.images.length > 0 ? product.images[0] : ''}
                           name={product.name} 
                           price={product.price.toString()} 
-                          seller_name={shop.store_name}
+                          seller_name={shop.name}
                           rate={product.rating || 0} 
                           onClickProp={() => onClickHandler(product.id)}
                       />

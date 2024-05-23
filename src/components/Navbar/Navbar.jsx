@@ -45,15 +45,17 @@ const Navbar = (props) => {
 				/>
 			</div>
 			<div className="d-flex flex-row justify-content-around">
-				<Img
-					key="cart"
-					source={cart}
-					containerStyle={styles.cart}
-					imgStyle={styles.cartImg}
-					onClickProp={() => {
-						props.history.push("/mybag");
-					}}
-				/>
+			{!isLogin || (isLogin && user.user_type !== "Seller" && user.user_type !== "Admin") ? (
+        <Img
+            key="cart"
+            source={cart}
+            containerStyle={styles.cart}
+            imgStyle={styles.cartImg}
+            onClickProp={() => {
+                props.history.push("/mybag");
+            }}
+        />
+    ) : null}
 				{isLogin && user.token ? (
 					<nav className={styles.navList}>
 						<Img

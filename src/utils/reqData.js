@@ -125,6 +125,9 @@ export const getOrderSeller = (id) => {
 export const getOrderAdmin = (id) => {
   return Axios.get(`${API_URL}/order/admin/${id}`);
 };
+export const getSellerAdmin = (id) => {
+  return Axios.get(`${API_URL}/order/admin/store/${id}`);
+};
 export const resetPasswordSeller = (data) => {
   return Axios.post(`http://localhost:8000/auth/resetpassseller`, data);
 };

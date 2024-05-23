@@ -16,7 +16,7 @@ export default function MyProfile(props) {
     (state) => state.auth
   );
   const [store, setDataStore] = useState({
-    name: user.store_name ? user.store_name : "",
+    name: user.name ? user.name : "",
     email: user.email ? user.email : "",
     phone: user.phone_number ? user.phone_number : "-",
     desc: user.store_desc ? user.store_desc : "-",

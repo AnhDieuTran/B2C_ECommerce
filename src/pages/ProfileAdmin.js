@@ -18,7 +18,7 @@ export default function ProfileAdmin() {
           setEdit={() => setEdit(!edit)}
           setNav1={() => setNav("storeprofile")}
           setNav2={() => setNav("myproduct")}
-          setNav3={() => setNav("selingproduct")}
+          setNav3={() => setNav("mystore")}
           setNav4={() => setNav("myorder")}
           setNav5={() => setNav("ordercancel")}
           onShow={() => setLogout(true)}

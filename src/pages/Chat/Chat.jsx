@@ -139,7 +139,7 @@ const Chat = (props) => {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		document.title = "Chat | Blanja";
+		document.title = "Chat | Trendy";
 	}, []);
 
 	async function fetchChatData() {

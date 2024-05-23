@@ -6,13 +6,14 @@ import {
   getOrderCustomerCreator,
   getOrderSellerCreator,
   getOrderAdminCreator,
+  getSellerAdminCreator,
 } from "../actions/product";
 
-// let invoice = Math.floor(Math.random() * 100001) + 1;
 const initialState = {
   msg: "",
   status: "",
   product: [],
+  store: [],
   carts: [],
   checkout: {
     id: "",
@@ -27,48 +28,48 @@ const initialState = {
   isPending: false,
   isFulfilled: false,
   isRejected: false,
-
   statusGetProdBySelId: null,
   dataGetProdBySelId: null,
   errorGetProdBySelId: undefined,
   isGetProdBySelIdPending: false,
   isGetProdBySelIdFulFilled: false,
   isGetProdBySelIdRejected: false,
-
   statusGetProdByAdminId: null,
   dataGetProdByAdminId: null,
   errorGetProdByAdminId: undefined,
   isGetProdByAdminIdPending: false,
   isGetProdByAdminIdFulFilled: false,
   isGetProdByAdminIdRejected: false,
-
   statusAddProd: null,
   dataAddProd: null,
   errorAddProd: undefined,
   isAddProdPending: false,
   isAddProdFulFilled: false,
   isAddProdRejected: false,
-
   statusGetOrderCust: null,
   dataGetOrderCust: null,
   errorGetOrderCust: undefined,
   isGetOrderCustPending: false,
   isGetOrderCustFulFilled: false,
   isGetOrderCustRejected: false,
-
   statusGetOrderSell: null,
   dataGetOrderSell: null,
   errorGetOrderSell: undefined,
   isGetOrderSellPending: false,
   isGetOrderSellFulFilled: false,
   isGetOrderSellRejected: false,
-
   statusGetOrderAdmin: null,
   dataGetOrderAdmin: null,
   errorGetOrderAdmin: undefined,
   isGetOrderAdminPending: false,
   isGetOrderAdminFulFilled: false,
   isGetOrderAdminRejected: false,
+  statusGetSellerAdmin: null,
+  dataGetSellerAdmin: null,
+  errorGetSellerAdmin: undefined,
+  isGetSellerAdminPending: false,
+  isGetSellerAdminFulFilled: false,
+  isGetSellerAdminRejected: false,
 };
 
 const productReducer = (state = initialState, { type, payload }) => {
@@ -86,16 +87,14 @@ const productReducer = (state = initialState, { type, payload }) => {
         isRejected: true,
         isFulfilled: false,
         status: payload.data.status,
-        // msg: payload.data.data.msg,
       };
     case actions.GET_PRODUCT_BY_ID + actions.FULFILLED:
       return {
         ...state,
         productDetail: payload.data.data,
         isPending: false,
-        isRejected: true,
+        isRejected: false,
         isFulfilled: true,
-        // status: payload.data.data.msg,
       };
     case actions.FETCH_ALL_PRODUCT + actions.PENDING:
       return {
@@ -109,7 +108,6 @@ const productReducer = (state = initialState, { type, payload }) => {
         isRejected: true,
         isFulfilled: false,
         status: payload.data.status,
-        // msg: payload.data.data.msg,
       };
     case actions.FETCH_ALL_PRODUCT + actions.FULFILLED:
       if (payload.data.status === 200) {
@@ -118,7 +116,6 @@ const productReducer = (state = initialState, { type, payload }) => {
           isPending: false,
           isFulfilled: true,
           product: payload.data.data,
-          // status: payload.data.data.msg,
         };
       } else {
         return {
@@ -126,7 +123,6 @@ const productReducer = (state = initialState, { type, payload }) => {
           isPending: false,
           isRejected: true,
           isFulfilled: true,
-          // status: payload.data.data.msg,
         };
       }
     case actions.ADD_PAYMENT_METHOD:
@@ -195,7 +191,7 @@ const productReducer = (state = initialState, { type, payload }) => {
         qty: state.carts[indexQtyDec].qty - 1,
       };
       if (newCart[indexQtyDec].qty === 0) {
-        state.carts.splice(indexQtyDec, 1); //hapus data pada array
+        state.carts.splice(indexQtyDec, 1);
         return {
           ...state,
           carts: state.carts,
@@ -206,7 +202,6 @@ const productReducer = (state = initialState, { type, payload }) => {
           carts: newCart,
         };
       }
-
     case actions.INSERT_TRANSACTION + actions.PENDING:
       return {
         ...state,
@@ -227,7 +222,6 @@ const productReducer = (state = initialState, { type, payload }) => {
           ...state,
           isPending: false,
           isFulfilled: true,
-          // status: payload.data.data.msg,
         };
       } else {
         return {
@@ -235,10 +229,8 @@ const productReducer = (state = initialState, { type, payload }) => {
           isPending: false,
           isRejected: true,
           isFulfilled: true,
-          // status: payload.data.data.msg,
         };
       }
-
     case String(getProductBySellerIdCreator.pending):
       return {
         ...state,
@@ -277,42 +269,42 @@ const productReducer = (state = initialState, { type, payload }) => {
         isGetProdBySelIdFulFilled: false,
       };
     case String(getProductByAdminIdCreator.pending):
-        return {
-          ...state,
-          isGetProdByAdminIdPending: true,
-        };
+      return {
+        ...state,
+        isGetProdByAdminIdPending: true,
+      };
     case String(getProductByAdminIdCreator.fulfilled): {
-        let status;
-        let err;
-        let data;
-        if (payload.status === 200) {
-          status = 200;
-          err = undefined;
-          data = payload.data;
-        } else {
-          status = 500;
-          err = payload.error;
-          data = [];
-        }
-        return {
-          ...state,
-          statusGetProdByAdminId: status,
-          dataGetProdByAdminId: data,
-          errorGetProdByAdminId: err,
-          isGetProdByAdminIdPending: false,
-          isGetProdByAdminIdFulFilled: true,
-          isGetProdByAdminIdRejected: false,
-        };
+      let status;
+      let err;
+      let data;
+      if (payload.status === 200) {
+        status = 200;
+        err = undefined;
+        data = payload.data;
+      } else {
+        status = 500;
+        err = payload.error;
+        data = [];
       }
+      return {
+        ...state,
+        statusGetProdByAdminId: status,
+        dataGetProdByAdminId: data,
+        errorGetProdByAdminId: err,
+        isGetProdByAdminIdPending: false,
+        isGetProdByAdminIdFulFilled: true,
+        isGetProdByAdminIdRejected: false,
+      };
+    }
     case String(getProductByAdminIdCreator.rejected):
-        return {
-          ...state,
-          statusGetProdByAdminId: 500,
-          errorGetProdByAdminId: payload,
-          isGetProdByAdminIdRejected: true,
-          isGetProdByAdminIdPending: false,
-          isGetProdByAdminIdFulFilled: false,
-        };
+      return {
+        ...state,
+        statusGetProdByAdminId: 500,
+        errorGetProdByAdminId: payload,
+        isGetProdByAdminIdRejected: true,
+        isGetProdByAdminIdPending: false,
+        isGetProdByAdminIdFulFilled: false,
+      };
     case String(addProductCreator.pending):
       return {
         ...state,
@@ -351,7 +343,6 @@ const productReducer = (state = initialState, { type, payload }) => {
         isAddProdPending: false,
         isAddProdFulFilled: false,
       };
-
     case String(getOrderCustomerCreator.pending):
       return {
         ...state,
@@ -361,7 +352,6 @@ const productReducer = (state = initialState, { type, payload }) => {
       let status;
       let err;
       let data;
-
       if (payload.status === 200) {
         status = 200;
         err = undefined;
@@ -390,7 +380,6 @@ const productReducer = (state = initialState, { type, payload }) => {
         isGetOrderCustPending: false,
         isGetOrderCustFulFilled: false,
       };
-
     case String(getOrderSellerCreator.pending):
       return {
         ...state,
@@ -419,6 +408,15 @@ const productReducer = (state = initialState, { type, payload }) => {
         isGetOrderSellRejected: false,
       };
     }
+    case String(getOrderSellerCreator.rejected):
+      return {
+        ...state,
+        statusGetOrderSell: 500,
+        errorGetOrderSell: payload,
+        isGetOrderSellRejected: true,
+        isGetOrderSellPending: false,
+        isGetOrderSellFulFilled: false,
+      };
     case String(getOrderAdminCreator.pending):
       return {
         ...state,
@@ -447,15 +445,6 @@ const productReducer = (state = initialState, { type, payload }) => {
         isGetOrderAdminRejected: false,
       };
     }
-    case String(getOrderSellerCreator.rejected):
-      return {
-        ...state,
-        statusGetOrderAdmin: 500,
-        errorGetOrderAdmin: payload,
-        isGetOrderAdminRejected: true,
-        isGetOrderAdminPending: false,
-        isGetOrderAdminFulFilled: false,
-      };
     case String(getOrderAdminCreator.rejected):
       return {
         ...state,
@@ -464,6 +453,43 @@ const productReducer = (state = initialState, { type, payload }) => {
         isGetOrderAdminRejected: true,
         isGetOrderAdminPending: false,
         isGetOrderAdminFulFilled: false,
+      };
+    case String(getSellerAdminCreator.pending):
+      return {
+        ...state,
+        isGetSellerAdminPending: true,
+      };
+    case String(getSellerAdminCreator.fulfilled): {
+      let status;
+      let err;
+      let data;
+      if (payload.status === 200) {
+        status = 200;
+        err = undefined;
+        data = payload.data;
+      } else {
+        status = 500;
+        err = payload.error;
+        data = null;
+      }
+      return {
+        ...state,
+        statusGetSellerAdmin: status,
+        store: data,
+        errorGetSellerAdmin: err,
+        isGetSellerAdminPending: false,
+        isGetSellerAdminFulFilled: true,
+        isGetSellerAdminRejected: false,
+      };
+    }
+    case String(getSellerAdminCreator.rejected):
+      return {
+        ...state,
+        statusGetSellerAdmin: 500,
+        errorGetSellerAdmin: payload,
+        isGetSellerAdminRejected: true,
+        isGetSellerAdminPending: false,
+        isGetSellerAdminFulFilled: false,
       };
     case "RESET_STATUS_PRODUCT":
       return {

@@ -138,6 +138,14 @@ export const getOrderAdminCreator = createAsyncAction(
     return res.data;
   }
 );
+export const getSellerAdminCreator = createAsyncAction(
+  "GET_SELLER_ADMIN",
+  async (id) => {
+    const res = await api.getSellerAdmin(id);
+    return res.data;
+  }
+);
+
 export const resetStatusProduct = () => {
   return {
     type: "RESET_STATUS_PRODUCT",

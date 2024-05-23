@@ -103,6 +103,49 @@ export default function LeftBar(props) {
             }}>
             <Accordion.Toggle
               onClick={() => {
+                setNav3();
+                setArrow({
+                  store: !arrow.store,
+                  product: false,
+                  order: false,
+                });
+              }}
+              as={Card.Header}
+              eventKey='3'
+              style={{
+                padding: 0,
+                display: "flex",
+                alignItems: "center",
+                border: "none",
+                backgroundColor: "#ffffff",
+                cursor: "pointer",
+                flexDirection: "row",
+              }}>
+              <span className='fa-stack fa-lg' style={{ flex: 1 }}>
+                <i
+                  className='fa fa-circle fa-stack-2x'
+                  style={{ color: "#4CAF50" }}></i>
+                <i className='fa fa-home fa-stack-1x fa-inverse'></i>
+              </span>
+              <p
+                style={{ flex: 5 }}
+                className={
+                  nav === "mystore"
+                    ? styles.active
+                    : styles.inactive
+                }>
+                My Store
+              </p>
+            </Accordion.Toggle>
+          </Card>
+
+          <Card
+            style={{
+              backgroundColor: "#ffffff",
+              border: "none",
+            }}>
+            <Accordion.Toggle
+              onClick={() => {
                 setNav4();
                 setArrow({
                   store: false,
@@ -114,6 +157,7 @@ export default function LeftBar(props) {
               as={Card.Header}
               eventKey='2'
               style={{
+                marginLeft: 8,
                 padding: 0,
                 display: "flex",
                 alignItems: "center",

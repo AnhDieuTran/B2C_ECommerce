@@ -52,6 +52,16 @@ const transactionController = {
 				responseForm.error(res, err);
 			});
 	},
+	getSellerAdmin: function (req, res) {
+		transactionModel
+			.getSellerAdmin(req.params.id)
+			.then((data) => {
+				responseForm.success(res, data);
+			})
+			.catch((err) => {
+				responseForm.error(res, err);
+			});
+	},
 	addOrder: function (req, res) {
 		transactionModel
 			.addOrder(req.body)

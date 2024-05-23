@@ -102,7 +102,7 @@ const productModel = {
 	},
 	getProductByAdminId: function (id) {
 		const queryString =
-		"SELECT product.id, product.name, brand, price,qty,status,description,added_at FROM product WHERE 1";
+		"SELECT product.id, product.name, brand, price,qty,status,description,added_at FROM product";
 		return new Promise((resolve, reject) => {
 			db.query(queryString, [id], (err, data) => {
 				if (err) {

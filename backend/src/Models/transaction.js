@@ -16,7 +16,14 @@ const getTransQuerySeller =
 	`SELECT customer.name as user_name, transaction.id as transaction_id, amount, payment_method, address, date, product.name, product_img.img, trans_pvt.qty as qty, transaction.amount as total_amount FROM transaction JOIN trans_pvt ON trans_pvt.transaction_id = transaction.id JOIN customer ON customer.id = transaction.customer_id JOIN product ON product.id = trans_pvt.product_id JOIN product_img ON product_img.product_id = product.id JOIN seller ON seller.id = transaction.seller_id
 	WHERE transaction.seller_id = ? GROUP BY transaction.id`;
 const getTransQueryAdmin = 
-	"SELECT * FROM `transaction` WHERE 1";
+`SELECT customer.name as user_name, transaction.id as transaction_id, payment_method, date, product.name, transaction.amount as total_amount FROM transaction JOIN trans_pvt ON trans_pvt.transaction_id = transaction.id JOIN customer ON customer.id = transaction.customer_id LEFT JOIN product ON product.id = trans_pvt.product_id
+GROUP BY transaction.id`;
+const getSellerQueryAdmin = 
+	`SELECT s.*, COUNT(DISTINCT p.id) AS totalProduct, SUM(DISTINCT t.amount) AS sales FROM seller s 
+	JOIN transaction t ON t.seller_id = s.id
+	JOIN product p ON p.seller_id = s.id 
+	GROUP BY s.id`;
+
 const transactionModel = {
 	alignHelper: function (data) {
 
@@ -75,6 +82,73 @@ const transactionModel = {
 		}
 		return objRes;
 	},
+	sellerAdminAlignHelper: function (data) {
+
+		let arrayOfOrder = [[]];
+		let objRes = [];
+		let lastElement = {};
+		let orderIdx = 0;
+		let dataLength = data.length;
+		for (let i = 0; i < dataLength; i++) {
+			if (i === 0) {
+				arrayOfOrder[orderIdx].push({
+					name: data[i].name,
+					image: data[i].avatar,
+				});
+				lastElement = data[i];
+			} else if (data[i].id !== lastElement.id) {
+				objRes[orderIdx] = [];
+				objRes[orderIdx] = {
+					id: lastElement.id,
+					name: lastElement.name,
+					store_name: lastElement.store_name,
+					phone_number: lastElement.phone_number,
+					description: lastElement.store_desc,
+					total_product: lastElement.totalProduct,
+					sales: lastElement.sales
+				};
+				orderIdx++;
+				arrayOfOrder[orderIdx] = [];
+				arrayOfOrder[orderIdx].push({
+					name: data[i].name,
+					image: data[i].avatar,
+				});
+				lastElement = data[i];
+			} else {
+				arrayOfOrder[orderIdx].push({
+					name: data[i].name,
+					image: data[i].avatar,
+				});
+				lastElement = data[i];
+			}
+			if (i === dataLength - 1) {
+				objRes[orderIdx] = {};
+				objRes[orderIdx] = {
+					id: lastElement.id,
+					name: lastElement.name,
+					store_name: lastElement.store_name,
+					phone_number: lastElement.phone_number,
+					description: lastElement.store_desc,
+					total_product: lastElement.totalProduct,
+					sales: lastElement.sales
+				};
+			}
+		}
+		return objRes;
+	},
+	getSellerAdmin: function (id) {
+		console.log(id);
+		return new Promise((resolve, reject) => {
+			db.query(getSellerQueryAdmin, (err, data) => {
+				if (err) {
+					console.log(err);
+					reject({ msg: "No Seller found" });
+				}
+				// console.log("re", this.sellerAdminAlignHelper(data));
+				resolve(this.sellerAdminAlignHelper(data));
+			});
+		});
+	},
 	addTransaction: function (body) {
 		const { products, ...rest } = body;
 		return new Promise((resolve, reject) => {
@@ -123,18 +197,20 @@ const transactionModel = {
 		});
 	},
 	getTransactionAdmin: function (id) {
-		console.log(id);
+		//console.log(id);
 		return new Promise((resolve, reject) => {
 			db.query(getTransQueryAdmin, [id], (err, data) => {
 				if (err) {
 					console.log(err);
 					reject({ msg: "No Transaction found" });
 				}
-				// console.log(this.alignHelper(data));
+				console.log("trans", this.alignHelper(data));
 				resolve(this.alignHelper(data));
 			});
 		});
 	},
+
+	
 	addOrder: function (body) {
 		const { invoice, customer_id, order_menu, amount } = body;
 		return new Promise((resolve, reject) => {

@@ -35,7 +35,7 @@ const productController = {
 	},
 	getProductByAdminId: function (req, res) {
 		productModel
-			.getProductBySellerId(req.params.id)
+			.getProductByAdminId(req.params.id)
 			.then((data) => {
 				formResponse.success(res, data);
 			})

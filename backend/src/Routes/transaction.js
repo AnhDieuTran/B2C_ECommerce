@@ -18,6 +18,10 @@ transactionRouter.get(
 	"/admin/:id",
 	transactionController.getTransactionAdmin
 );
+transactionRouter.get(
+	"/admin/store/:id",
+	transactionController.getSellerAdmin
+  );
 // transactionRouter.post("/order", transactionController.addOrder);
 
 module.exports = transactionRouter;

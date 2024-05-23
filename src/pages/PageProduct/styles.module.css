@@ -137,15 +137,18 @@
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
+	margin-left: 15rem;
 }
 .user {
 	display: flex;
 	align-items: center; /* Căn các phần tử theo chiều dọc */
-	margin-left: 25%;
 	margin-bottom: 3rem;
+	background-color: #FFDECF;
+	height: 200px;
   }
   
   .store {
-	margin-left: 20%; /* Đẩy phần tử sang bên phải, đảm bảo phần còn lại của không gian trống */
+	margin-left: 5rem; /* Đẩy phần tử sang bên phải, đảm bảo phần còn lại của không gian trống */
+	margin-right: 10rem;
   }
   
