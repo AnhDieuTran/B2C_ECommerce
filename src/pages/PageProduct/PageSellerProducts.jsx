@@ -71,9 +71,8 @@ const PageSellerProducts = (props) => {
   const dispatch = useDispatch();
   const { dataGetProdBySelId } = useSelector((state) => state.product);
   const { sellerInfo } = useSelector((state) => state.auth);
-console.log(sellerInfo)
+console.log(sellerInfo, "")
   useEffect(() => {
-    // Assuming sellerId is available somehow, e.g., from props or state
     const sellerId = props.match.params.sellerId;
     console.log(sellerId)
     dispatch(getProfileStoreCreator(sellerId));

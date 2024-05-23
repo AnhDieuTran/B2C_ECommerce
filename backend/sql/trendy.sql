@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 22, 2024 at 05:14 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 23, 2024 lúc 01:09 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `blanja`
+-- Cơ sở dữ liệu: `trendy`
 --
-
+CREATE DATABASE trendy;
+USE trendy;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
-
-CREATE Database blanja;
-USE blanja;
+-- Cấu trúc bảng cho bảng `address`
 --
-DROP TABLE IF EXISTS `address`;
+
 CREATE TABLE `address` (
   `user_id` int(11) DEFAULT NULL,
   `save_address` varchar(255) DEFAULT NULL,
@@ -41,38 +39,38 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `address`
+-- Đang đổ dữ liệu cho bảng `address`
 --
 
 INSERT INTO `address` (`user_id`, `save_address`, `recipient_name`, `address`, `city_of_subdistrict`, `recipient_telp_number`, `postal_code`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, NULL, NULL, NULL, NULL);
+(NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Tuyên Quang', 'Ngọc', '', '', '0125632598', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
 CREATE TABLE `admin` (
-  `id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admin`
+-- Đang đổ dữ liệu cho bảng `admin`
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`) VALUES
-(1, 'abcdfff', '', ''),
-(1, 'a', 'abc@gmail.com', '$2b$10$UXZ2ua.xk/1gmMsYgWJ.meUDPFS0jKdUNgGYMOllfwjjInGZbjcY2');
+(1, 'ADMIN', 'admin@gmail.com', '$2b$10$BT73u/SlFl7KQ.Guzf0Gl.pARtAetqRygH38L9c0.c5hhgWv7wIGy');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Cấu trúc bảng cho bảng `category`
 --
 
 CREATE TABLE `category` (
@@ -81,7 +79,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `category`
+-- Đang đổ dữ liệu cho bảng `category`
 --
 
 INSERT INTO `category` (`category_id`, `category`) VALUES
@@ -105,7 +103,7 @@ INSERT INTO `category` (`category_id`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Cấu trúc bảng cho bảng `customer`
 --
 
 CREATE TABLE `customer` (
@@ -120,17 +118,17 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `customer`
+-- Đang đổ dữ liệu cho bảng `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `email`, `password`, `avatar`, `phone_number`, `gender`, `dob`) VALUES
-(1, 'Taufiq Widi', 'taufiq@gmail.com', '$2b$10$67sp9DLaRRk9DMloFYMOJ.CVugMVhbNCyNKp8ql.hfjnn1jwacska', NULL, NULL, NULL, NULL),
-(2, 'abc123', 'doduc2003uet@gmail.com', '$2b$10$lQvzDaClStM7LISNwzea/.DozsADnHJSpJRZFuIP8DCuXBXXJY6iy', NULL, NULL, NULL, NULL);
+(2, 'abc123', 'doduc2003uet@gmail.com', '$2b$10$lQvzDaClStM7LISNwzea/.DozsADnHJSpJRZFuIP8DCuXBXXJY6iy', NULL, NULL, NULL, NULL),
+(3, 'Anhh', 'anhD@gmail.com', '$2b$10$AwhPBLe1NDpK8kLtUh8noOSt557YJTi27OsNCHmC1IR/50.qqmyRS', '', '0986521458', 'female', '10 June 2000');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Cấu trúc bảng cho bảng `product`
 --
 
 CREATE TABLE `product` (
@@ -147,7 +145,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product`
+-- Đang đổ dữ liệu cho bảng `product`
 --
 
 INSERT INTO `product` (`id`, `seller_id`, `name`, `brand`, `price`, `category_id`, `qty`, `status`, `description`, `added_at`) VALUES
@@ -171,12 +169,14 @@ INSERT INTO `product` (`id`, `seller_id`, `name`, `brand`, `price`, `category_id
 (39, 1, 'Logo 72006L2LL Candeza Dress Wanita - Light Blue ', 'Logo', '129000', 13, '4', 'Baru', 'Dress wanita berbahan chambray yang didesain trendy dengan front button opening dan self tie ribbon sehingga cocok digunakan untuk acara formal maupun non formal.', '2020-10-14 15:18:58'),
 (40, 1, 'Nikayu Semi Formal New Dylan Style Jas Pria', 'Nikayu', '255000', 14, '4', 'Baru', 'Nikayu Semi Formal New Dylan Style Jas Pria - Black merupakan long sleeve blazer berbahan high twist yang didesain slim fit dengan notch lapel, button opening, left chest pocket, dan 2 front pockets. Cocok digunakan untuk acara formal dan semi formal Anda', '2020-10-14 15:23:26'),
 (41, 1, 'Gelang Nike 2 warna', 'Nike', '9000', 15, '50', 'Baru', 'Gelang Nike Import, bahan silicone, size ukuran 19cm', '2020-10-14 15:27:23'),
-(42, 1, 'Yongki Komaladi Salsa High Heels Wanita - Black ', 'Yongki Komaladi', '250000', 22, '2', 'Baru', 'Yongki Komaladi Salsa High Heels Wanita - Black merupakan high heel berbahan lax syhnthetic yang didesain casual dengan detail neat stitching, pointed toe dan outsole yang nyaman pada saat digunakan. Cocok digunakan pada acara formal dan informal. ', '2020-10-14 15:35:16');
+(42, 1, 'Yongki Komaladi Salsa High Heels Wanita - Black ', 'Yongki Komaladi', '250000', 22, '2', 'Baru', 'Yongki Komaladi Salsa High Heels Wanita - Black merupakan high heel berbahan lax syhnthetic yang didesain casual dengan detail neat stitching, pointed toe dan outsole yang nyaman pada saat digunakan. Cocok digunakan pada acara formal dan informal. ', '2020-10-14 15:35:16'),
+(48, 3, 'Cap', NULL, '50000', 6, '20', 'Baru', '', '2024-05-03 03:31:42'),
+(49, 3, 'Jacket Denim', NULL, '250000', 3, '250', 'Baru', '2023 New Men′s Jacket Denim Jacket Korean Youth New Style Spring and Autumn Trend Casual Jacket', '2024-05-08 18:58:59');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_img`
+-- Cấu trúc bảng cho bảng `product_img`
 --
 
 CREATE TABLE `product_img` (
@@ -185,7 +185,7 @@ CREATE TABLE `product_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_img`
+-- Đang đổ dữ liệu cho bảng `product_img`
 --
 
 INSERT INTO `product_img` (`product_id`, `img`) VALUES
@@ -269,12 +269,17 @@ INSERT INTO `product_img` (`product_id`, `img`) VALUES
 (42, '/images/1602689716663-img.jpg'),
 (42, '/images/1602689716664-img.jpg'),
 (42, '/images/1602689716667-img.jpg'),
-(42, '/images/1602689716668-img.jpg');
+(42, '/images/1602689716668-img.jpg'),
+(NULL, ''),
+(NULL, ''),
+(48, '/images/1714707102409-img.png'),
+(49, '/images/1715194739289-img.png'),
+(49, '/images/1715194739292-img.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `seller`
+-- Cấu trúc bảng cho bảng `seller`
 --
 
 CREATE TABLE `seller` (
@@ -289,17 +294,18 @@ CREATE TABLE `seller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `seller`
+-- Đang đổ dữ liệu cho bảng `seller`
 --
 
 INSERT INTO `seller` (`id`, `name`, `email`, `phone_number`, `store_name`, `password`, `avatar`, `store_desc`) VALUES
-(1, 'Bang Best', 'best@gmail.com', '0819687277777', 'Best Sport', '$2b$10$UXZ2ua.xk/1gmMsYgWJ.meUDPFS0jKdUNgGYMOllfwjjInGZbjcY2', NULL, NULL),
-(2, 'aba', 'abca@gmail.com', '222222222', 'duc', '$2b$10$UXZ2ua.xk/1gmMsYgWJ.meUDPFS0jKdUNgGYMOllfwjjInGZbjcY2', NULL, NULL);
+(1, 'Ooanh', 'oanh@gmail.com', '0569842369', 'Clothes', '$2b$10$UiB9vJE0UKqAXM7fT6uH5eZIzNAxD6BLFVLgjlnAUoFVqUyTJSCOe', '/images/1602683654164-img.jpg', 'Shop chuyên bán quần áo '),
+(2, 'aba', 'abca@gmail.com', '222222222', 'duc', '$2b$10$UXZ2ua.xk/1gmMsYgWJ.meUDPFS0jKdUNgGYMOllfwjjInGZbjcY2', NULL, NULL),
+(3, 'Oanh', 'oanh123@gmail.com', '0569842369', 'Fac', '$2b$10$KLvDSIUZnBiNnRdD4gkHzugilUHcQ/VS0etSRLdafoiSERM6qZrqq', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaction`
+-- Cấu trúc bảng cho bảng `transaction`
 --
 
 CREATE TABLE `transaction` (
@@ -313,18 +319,22 @@ CREATE TABLE `transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `transaction`
+-- Đang đổ dữ liệu cho bảng `transaction`
 --
 
 INSERT INTO `transaction` (`id`, `customer_id`, `seller_id`, `amount`, `payment_method`, `address`, `date`) VALUES
-(76573, 1, 1, '1005000', 'mastercard', 'undefined, undefined, undefined, undefined', '2024-03-20 10:30:27'),
-(123456, 1, 1, '20000', 'visa', 'your heart', '2020-10-13 17:00:00'),
-(199825, 1, 1, '20000', 'visa', 'your heart', '2020-10-13 17:00:00');
+(691, 3, 3, '55000', 'money', ', , , 0125632598', '2024-05-03 03:49:11'),
+(5768, 3, 3, '505000', 'money', ', , , 0125632598', '2024-05-08 18:59:39'),
+(29614, 3, 1, '403000', 'banking', ', , , 0125632598', '2024-05-21 14:59:46'),
+(39261, 3, 1, '2405000', 'banking', ', , , 0125632598', '2024-05-03 03:49:11'),
+(50954, 3, 1, '204000', 'money', ', , , 0125632598', '2024-05-03 03:49:11'),
+(54977, 2, 3, '105000', 'e-wallet', ', , , 0125632598', '2024-05-03 03:49:11'),
+(67472, 3, 1, '305000', 'e-wallet', ', , , 0125632598', '2024-05-03 03:49:11');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trans_pvt`
+-- Cấu trúc bảng cho bảng `trans_pvt`
 --
 
 CREATE TABLE `trans_pvt` (
@@ -334,41 +344,67 @@ CREATE TABLE `trans_pvt` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `trans_pvt`
+-- Đang đổ dữ liệu cho bảng `trans_pvt`
 --
 
 INSERT INTO `trans_pvt` (`transaction_id`, `product_id`, `qty`) VALUES
-(123456, NULL, 2),
-(123456, NULL, 6),
-(199825, NULL, 2),
-(199825, NULL, 6),
-(76573, 23, 1);
+(NULL, NULL, 2),
+(NULL, NULL, 6),
+(NULL, NULL, 2),
+(NULL, NULL, 6),
+(NULL, 23, 1),
+(NULL, 33, 1),
+(NULL, 22, 1),
+(NULL, 25, 1),
+(NULL, 33, 1),
+(NULL, 23, 1),
+(NULL, 33, 1),
+(NULL, 24, 1),
+(NULL, 26, 1),
+(NULL, 29, 1),
+(NULL, 34, 2),
+(NULL, 30, 1),
+(NULL, 28, 1),
+(NULL, 36, 1),
+(39261, 37, 1),
+(50954, 24, 1),
+(691, 48, 1),
+(54977, 48, 2),
+(67472, 33, 3),
+(5768, 49, 2),
+(29614, 26, 2);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `address`
+-- Chỉ mục cho bảng `address`
 --
 ALTER TABLE `address`
   ADD KEY `id` (`user_id`);
 
 --
--- Indexes for table `category`
+-- Chỉ mục cho bảng `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `customer`
+-- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `product`
+-- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
@@ -376,20 +412,20 @@ ALTER TABLE `product`
   ADD KEY `seller_id` (`seller_id`);
 
 --
--- Indexes for table `product_img`
+-- Chỉ mục cho bảng `product_img`
 --
 ALTER TABLE `product_img`
   ADD KEY `id` (`product_id`);
 
 --
--- Indexes for table `seller`
+-- Chỉ mục cho bảng `seller`
 --
 ALTER TABLE `seller`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `transaction`
+-- Chỉ mục cho bảng `transaction`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`id`),
@@ -397,78 +433,84 @@ ALTER TABLE `transaction`
   ADD KEY `seller_id` (`seller_id`);
 
 --
--- Indexes for table `trans_pvt`
+-- Chỉ mục cho bảng `trans_pvt`
 --
 ALTER TABLE `trans_pvt`
   ADD KEY `transaction_id` (`transaction_id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT cho bảng `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
--- AUTO_INCREMENT for table `seller`
+-- AUTO_INCREMENT cho bảng `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `transaction`
+-- AUTO_INCREMENT cho bảng `transaction`
 --
 ALTER TABLE `transaction`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199826;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `address`
+-- Các ràng buộc cho bảng `address`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customer` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `product`
+-- Các ràng buộc cho bảng `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `seller` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `product_img`
+-- Các ràng buộc cho bảng `product_img`
 --
 ALTER TABLE `product_img`
   ADD CONSTRAINT `product_img_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `transaction`
+-- Các ràng buộc cho bảng `transaction`
 --
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `seller` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `trans_pvt`
+-- Các ràng buộc cho bảng `trans_pvt`
 --
 ALTER TABLE `trans_pvt`
   ADD CONSTRAINT `trans_pvt_ibfk_1` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
