@@ -1,4 +1,4 @@
-# Blanja Web <img src="https://img.shields.io/badge/Build%20with-ReactJs-61dbfb?style=popout&logo=react">
+# Trendy Web <img src="https://img.shields.io/badge/Build%20with-ReactJs-61dbfb?style=popout&logo=react">
 
 <div align="center">
     <img width="250" src="./public/logo.ico">
@@ -11,21 +11,15 @@
 - [Requirements](#requirements-for-development)
 - [Installation](#installation-for-development)
 - [Screenshoots](#screenshoots)
-- [Demo Blanja Web](#demo-blanja-web)
-- [Related Project](#related-project)
 
 ## Description
 
-**Blanja Web** is a web-based e-commerce application that allows buyers to order
-products of their choice. Consists of 2 types of users, namely buyers and
-sellers.
-
+**Trendy Web** là một ứng dụng web e-commerce B2C cho phép khách hàng xem và đặt mua quần áo. Đồng thời cho phép người bán đăng bán các sản phẩm. Admin có vai trò xem và quản lý người dùng.
 ## Features
 
 - Order product
 - History transaction
 - Add product (sellers only)
-- Chat
 - Edit profile
 - Reset Password
 - etc
@@ -35,7 +29,6 @@ sellers.
 - [`Node Js`](https://nodejs.org/en/)
 - [`npm`](https://www.npmjs.com/get-npm)
 - [`ReactJs`](https://reactjs.org/)
-- [`Blanja Backend`](https://github.com/Baruak-da-Familia/blanja-api.git)
 
 ## Installation for Development
 
@@ -75,19 +68,3 @@ REACT_APP_WEB_URL = "http://localhost:3000"
     <img width="100%" src="./src/assets/image/screenshoot2.png">
     <img width="100%" src="./src/assets/image/screenshoot3.png">
 </div>
-
-## Demo Blanja Web
-
-This is Blanja Web build version, let's try it.
-
-<a href="http://54.175.146.137:3000/">
-  <img src="https://img.shields.io/badge/Blanja%20Web-Link%20Demo-blue.svg?style=popout&logo=firefox"/>
-</a>
-
-## Related Project
-
-RESTful API for this web application, clone this for development Blanja Web.
-
-<a href="https://github.com/Baruak-da-Familia/blanja-api.git">
-<img src="https://img.shields.io/badge/Blanja%20Backend-Repository-blue.svg?style=popout&logo=github"/>
-</a>
