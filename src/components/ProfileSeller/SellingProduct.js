@@ -21,7 +21,7 @@ export default function SellingProduct(props) {
     name: "",
     price: "",
     qty: "",
-    category_id: "",
+    category_id: 1,
     status: "",
     description: "",
     img: [],
@@ -192,7 +192,7 @@ export default function SellingProduct(props) {
                   <option value='6'>Cap</option>
                   <option value='7'>Wristwatch</option>
                   <option value='8'>Handbag</option>
-                  <option value='9'>Backbag</option>
+                  <option value='9'>Bagpack</option>
                   <option value='10'>Socks</option>
                   <option value='11'>Glasses</option>
                   <option value='12'>Tie</option>

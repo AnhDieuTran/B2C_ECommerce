@@ -20,6 +20,10 @@ const Login = (props) => {
     const { user: registerUser } = useSelector((state) => state.auth);
 
     useEffect(() => {
+		document.title = "Sign up | Trendy";
+	}, []);
+
+    useEffect(() => {
         if (registerUser.msg === "Register Success") {
             props.history.push("/");
         }
@@ -54,16 +58,17 @@ const Login = (props) => {
                             )}
                             onClick={(e) => {
                                 e.preventDefault();
-                                // props.history.push("/RegisterCustomer");
+                                props.history.push("/RegisterCustomer");
                             }}
                         >
-                            <Link
+                            {/* <Link
                                 className={classname(styles.bla)}
                                 to="/RegisterCustomer"
                             >
                                 Customer
 
-						</Link>
+						</Link> */}
+                        Customer
                         </button>
                         <button
                             className={classname(
@@ -135,23 +140,6 @@ const Login = (props) => {
                         <p style={{ fontSize: 16, color: "red", marginTop: -20 }}>
                             {errors.phone_number &&
                                 errors.phone_number.message}
-                        </p>
-
-                        <div>
-                            <input
-                                className={classname(styles.registerInput)}
-                                id="storeName"
-                                placeholder="Store Name"
-                                name="store_name"
-                                ref={register({
-                                    required: "Required",
-                                })}
-                                type="text"
-
-                            />
-                        </div>
-                        <p style={{ fontSize: 16, color: "red", marginTop: -20 }}>
-                            {errors.store_name && errors.store_name.message}
                         </p>
 
 

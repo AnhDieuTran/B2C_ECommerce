@@ -150,7 +150,7 @@
 }
 .content_description {
   width: 100%;
-  height: calc((150 / 1440) * 100vw);
+  height: calc((280 / 1440) * 100vw);
   padding-bottom: 0;
   font-size: 16px;
   padding-left: calc((11 / 1440) * 100vw);

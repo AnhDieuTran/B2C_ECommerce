@@ -21,6 +21,10 @@ const Login = (props) => {
 	const { user: registerUser } = useSelector((state) => state.auth);
 
 	useEffect(() => {
+		document.title = "Sign up | Trendy";
+	}, []);
+
+	useEffect(() => {
 		if (registerUser.msg === "Register Success") {
 			props.history.push("/");
 		}
@@ -59,17 +63,17 @@ const Login = (props) => {
 						className={classname(styles.userTypeBtnSeller)}
 						onClick={(e) => {
 							e.preventDefault();
-							// props.history.push("/RegisterSeller");
+							props.history.push("/RegisterSeller");
 						}}
 					>
-						<Link
+						{/* <Link
 							className={classname(styles.bla)}
 							to="/RegisterSeller"
 						>
 							Seller
 
-						</Link>
-
+						</Link> */}
+						Seller
 					</button>
 				</div>
 				<form className={classname(styles.formContainer)}>

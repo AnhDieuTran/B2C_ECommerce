@@ -20,8 +20,8 @@ const getTransQueryAdmin =
 GROUP BY transaction.id`;
 const getSellerQueryAdmin = 
 	`SELECT s.*, COUNT(DISTINCT p.id) AS totalProduct, SUM(DISTINCT t.amount) AS sales FROM seller s 
-	JOIN transaction t ON t.seller_id = s.id
-	JOIN product p ON p.seller_id = s.id 
+	LEFT JOIN transaction t ON t.seller_id = s.id
+	LEFT JOIN product p ON p.seller_id = s.id 
 	GROUP BY s.id`;
 
 const transactionModel = {

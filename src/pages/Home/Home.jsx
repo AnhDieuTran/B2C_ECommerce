@@ -16,6 +16,8 @@ const Home = (props) => {
 		(state) => state.product
 	);
 
+	console.log("'''", stateProduct)
+
 	const onClickHandler = (id) => {
 		props.history.push(`/product/detail/${id}`);
 	};
