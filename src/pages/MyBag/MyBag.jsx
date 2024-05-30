@@ -246,7 +246,7 @@ const MyBag = () => {
 											</button>
 										</div>
 									</div>
-									<div className="col-2">
+									<div className="col-2 ml-5">
 										<p
 											href="#"
 											className={classname(
